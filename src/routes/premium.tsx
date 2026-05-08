@@ -81,7 +81,7 @@ function Premium() {
       </div>
 
       <div className="mt-8 px-6 pb-12 animate-fade-up delay-300">
-        <button className="flex h-14 w-full items-center justify-center rounded-2xl bg-foreground text-background text-[15px] font-medium tracking-wide active:scale-[0.98] transition-transform">
+        <button onClick={() => toast.success("Welcome to the Inner Circle", { description: "Your 7-day trial has started." })} className="flex h-14 w-full items-center justify-center rounded-2xl bg-foreground text-background text-[15px] font-medium tracking-wide active:scale-[0.98] transition-transform hover:opacity-90">
           Start 7 days free
         </button>
         <p className="mt-3 text-center text-[10px] uppercase tracking-[0.3em] text-muted-foreground/60">
