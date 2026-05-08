@@ -96,7 +96,7 @@ function WhatToText() {
                 <span className="text-muted-foreground">
                   Predicted reply: <span className="text-foreground/90">within 6h</span>
                 </span>
-                <button className="font-medium text-primary">Copy</button>
+                <button onClick={() => { navigator.clipboard?.writeText(m); toast.success("Copied"); }} className="font-medium text-primary hover:opacity-80">Copy</button>
               </div>
             </div>
           </div>
