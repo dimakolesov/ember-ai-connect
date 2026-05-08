@@ -173,8 +173,8 @@
     100% { transform: translateY(-220px) scale(0.3); opacity: 0; }
   }
   @keyframes pulse-glow {
-    0%, 100% { box-shadow: 0 0 30px -5px oklch(0.62 0.14 160 / 0.4); }
-    50% { box-shadow: 0 0 80px 0px oklch(0.78 0.16 158 / 0.65); }
+    0%, 100% { box-shadow: 0 0 30px -5px oklch(0.66 0.18 300 / 0.4); }
+    50% { box-shadow: 0 0 80px 0px oklch(0.78 0.18 305 / 0.65); }
   }
   @keyframes fade-up {
     from { opacity: 0; transform: translateY(24px); }
