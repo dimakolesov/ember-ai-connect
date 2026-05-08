@@ -83,8 +83,8 @@ function Analyst() {
           </button>
 
           <div className="mt-4 grid grid-cols-2 gap-3">
-            <button className="glass rounded-2xl py-3 text-[12px] font-medium">Paste chat</button>
-            <button className="glass rounded-2xl py-3 text-[12px] font-medium">Voice note</button>
+            <button onClick={() => toast("Paste your chat", { description: "Long-press to paste from clipboard." })} className="glass rounded-2xl py-3 text-[12px] font-medium transition-colors hover:border-primary/40">Paste chat</button>
+            <button onClick={() => toast("Voice note", { description: "Recording is coming soon." })} className="glass rounded-2xl py-3 text-[12px] font-medium transition-colors hover:border-primary/40">Voice note</button>
           </div>
         </div>
       )}
