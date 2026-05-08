@@ -109,7 +109,7 @@
   * { border-color: var(--color-border); }
 
   ::selection {
-    background: oklch(0.62 0.22 25 / 0.4);
+    background: oklch(0.66 0.18 300 / 0.4);
     color: oklch(0.98 0 0);
   }
 }
