@@ -45,49 +45,49 @@
 :root {
   --radius: 1rem;
 
-  /* Forced dark luxury — emerald couture */
-  --background: oklch(0.07 0.012 165);
-  --foreground: oklch(0.97 0.01 150);
+  /* Forced dark luxury — violet couture */
+  --background: oklch(0.07 0.018 300);
+  --foreground: oklch(0.97 0.01 300);
 
-  --card: oklch(0.10 0.015 165);
-  --card-foreground: oklch(0.97 0.01 150);
+  --card: oklch(0.10 0.022 300);
+  --card-foreground: oklch(0.97 0.01 300);
 
-  --popover: oklch(0.09 0.015 165);
-  --popover-foreground: oklch(0.97 0.01 150);
+  --popover: oklch(0.09 0.022 300);
+  --popover-foreground: oklch(0.97 0.01 300);
 
-  --primary: oklch(0.62 0.14 160);     /* emerald */
-  --primary-foreground: oklch(0.07 0.012 165);
+  --primary: oklch(0.66 0.18 300);     /* violet */
+  --primary-foreground: oklch(0.07 0.018 300);
 
-  --secondary: oklch(0.14 0.018 165);
-  --secondary-foreground: oklch(0.93 0.01 150);
+  --secondary: oklch(0.14 0.025 300);
+  --secondary-foreground: oklch(0.93 0.01 300);
 
-  --muted: oklch(0.12 0.015 165);
-  --muted-foreground: oklch(0.66 0.02 150);
+  --muted: oklch(0.12 0.022 300);
+  --muted-foreground: oklch(0.68 0.03 300);
 
-  --accent: oklch(0.20 0.05 160);
-  --accent-foreground: oklch(0.97 0.01 150);
+  --accent: oklch(0.22 0.07 300);
+  --accent-foreground: oklch(0.97 0.01 300);
 
   --destructive: oklch(0.58 0.22 25);
   --destructive-foreground: oklch(0.98 0 0);
 
   --border: oklch(1 0 0 / 7%);
   --input: oklch(1 0 0 / 9%);
-  --ring: oklch(0.62 0.14 160);
+  --ring: oklch(0.66 0.18 300);
 
-  --ember: oklch(0.62 0.14 160);          /* emerald */
-  --ember-glow: oklch(0.78 0.16 158);     /* jade glow */
-  --ash: oklch(0.48 0.02 150);
+  --ember: oklch(0.66 0.18 300);          /* violet */
+  --ember-glow: oklch(0.78 0.18 305);     /* lilac glow */
+  --ash: oklch(0.50 0.03 300);
   --gold: oklch(0.82 0.12 90);            /* champagne accent */
 
   /* Gradients & shadows */
-  --gradient-ember: linear-gradient(135deg, oklch(0.72 0.16 158) 0%, oklch(0.42 0.13 162) 55%, oklch(0.28 0.08 165) 100%);
-  --gradient-night: radial-gradient(ellipse at top, oklch(0.18 0.05 165 / 0.55), transparent 60%), linear-gradient(180deg, oklch(0.06 0.012 165) 0%, oklch(0.04 0.008 165) 100%);
-  --gradient-glass: linear-gradient(145deg, oklch(1 0 0 / 0.07) 0%, oklch(0.62 0.14 160 / 0.03) 100%);
-  --gradient-text: linear-gradient(180deg, oklch(0.98 0.01 150) 0%, oklch(0.72 0.06 158) 100%);
+  --gradient-ember: linear-gradient(135deg, oklch(0.78 0.18 305) 0%, oklch(0.50 0.20 300) 55%, oklch(0.30 0.12 295) 100%);
+  --gradient-night: radial-gradient(ellipse at top, oklch(0.20 0.08 300 / 0.55), transparent 60%), linear-gradient(180deg, oklch(0.06 0.018 300) 0%, oklch(0.04 0.012 295) 100%);
+  --gradient-glass: linear-gradient(145deg, oklch(1 0 0 / 0.07) 0%, oklch(0.66 0.18 300 / 0.04) 100%);
+  --gradient-text: linear-gradient(180deg, oklch(0.98 0.01 300) 0%, oklch(0.74 0.08 300) 100%);
   --gradient-gold: linear-gradient(135deg, oklch(0.86 0.12 90) 0%, oklch(0.62 0.10 75) 100%);
 
-  --shadow-ember: 0 10px 50px -12px oklch(0.62 0.14 160 / 0.55), 0 0 80px -24px oklch(0.78 0.16 158 / 0.5);
-  --shadow-glass: 0 8px 32px oklch(0 0 0 / 0.55), inset 0 1px 0 oklch(1 0 0 / 0.07), inset 0 0 0 1px oklch(0.62 0.14 160 / 0.05);
+  --shadow-ember: 0 10px 50px -12px oklch(0.66 0.18 300 / 0.55), 0 0 80px -24px oklch(0.78 0.18 305 / 0.5);
+  --shadow-glass: 0 8px 32px oklch(0 0 0 / 0.55), inset 0 1px 0 oklch(1 0 0 / 0.07), inset 0 0 0 1px oklch(0.66 0.18 300 / 0.06);
   --shadow-deep: 0 30px 80px -20px oklch(0 0 0 / 0.85);
 
   --transition-cinematic: cubic-bezier(0.16, 1, 0.3, 1);
@@ -109,7 +109,7 @@
   * { border-color: var(--color-border); }
 
   ::selection {
-    background: oklch(0.62 0.22 25 / 0.4);
+    background: oklch(0.66 0.18 300 / 0.4);
     color: oklch(0.98 0 0);
   }
 }
@@ -173,8 +173,8 @@
     100% { transform: translateY(-220px) scale(0.3); opacity: 0; }
   }
   @keyframes pulse-glow {
-    0%, 100% { box-shadow: 0 0 30px -5px oklch(0.62 0.14 160 / 0.4); }
-    50% { box-shadow: 0 0 80px 0px oklch(0.78 0.16 158 / 0.65); }
+    0%, 100% { box-shadow: 0 0 30px -5px oklch(0.66 0.18 300 / 0.4); }
+    50% { box-shadow: 0 0 80px 0px oklch(0.78 0.18 305 / 0.65); }
   }
   @keyframes fade-up {
     from { opacity: 0; transform: translateY(24px); }
