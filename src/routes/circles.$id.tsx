@@ -1,5 +1,5 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Send, Shield, Lock, Users, FileText, Sparkles, X, UserPlus, Copy, Check, Mail, Link as LinkIcon } from "lucide-react";
 import { EmberBg } from "@/components/EmberBg";
 import { PhoneFrame } from "@/components/PhoneFrame";
@@ -38,6 +38,13 @@ function CircleRoom() {
     if (!found) { toast("Session not found"); nav({ to: "/circles" }); return; }
     setS(found);
   }, [id, nav]);
+
+  useEffect(() => {
+    if (!s || s.inviteCode) return;
+    const next = { ...s, inviteCode: uid() };
+    setS(next);
+    upsertCircle(next);
+  }, [s?.id, s?.inviteCode]);
 
   useEffect(() => { scroll.current?.scrollTo({ top: 99999, behavior: "smooth" }); }, [s?.messages.length, tab, typing, intakeStep]);
 
@@ -122,13 +129,7 @@ function CircleRoom() {
     toast.success("Report ready");
   };
 
-  const inviteCode = useMemo(() => {
-    if (s.inviteCode) return s.inviteCode;
-    const code = uid();
-    persist({ ...s, inviteCode: code });
-    return code;
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [s.id]);
+  const inviteCode = s.inviteCode ?? "";
 
   const inviteLink = typeof window !== "undefined"
     ? `${window.location.origin}/join/${s.id}?c=${inviteCode}`
