@@ -305,6 +305,83 @@ function CircleRoom() {
         </div>
       )}
 
+      {showInvite && (
+        <div className="fixed inset-0 z-50 flex items-end justify-center bg-black/70 backdrop-blur-sm animate-fade-up" onClick={() => setShowInvite(false)}>
+          <div className="max-h-[88vh] w-full max-w-[440px] overflow-y-auto rounded-t-[32px] border border-border/60 bg-card/95 p-6 backdrop-blur-2xl" onClick={(e) => e.stopPropagation()}>
+            <div className="mx-auto mb-4 h-1 w-10 rounded-full bg-foreground/20" />
+            <div className="flex items-center justify-between">
+              <div>
+                <div className="text-[10px] uppercase tracking-[0.35em] text-primary/90">Invite</div>
+                <h3 className="mt-1 font-serif text-[24px]">Bring someone in</h3>
+                <p className="mt-1 text-[12px] text-muted-foreground">They'll join through a private link. The facilitator will brief them on the room's tone.</p>
+              </div>
+              <button onClick={() => setShowInvite(false)} className="grid h-9 w-9 place-items-center rounded-full glass"><X className="h-4 w-4" /></button>
+            </div>
+
+            <div className="mt-5 rounded-2xl border border-primary/40 bg-gradient-ember/10 p-4">
+              <div className="flex items-center gap-2 text-[10px] uppercase tracking-[0.3em] text-primary/90"><LinkIcon className="h-3 w-3" /> Invite link</div>
+              <div className="mt-2 break-all rounded-xl border border-border/60 bg-background/60 px-3 py-2 font-mono text-[11px] text-foreground/85">{inviteLink}</div>
+              <div className="mt-3 flex gap-2">
+                <button onClick={copyLink} className="flex flex-1 items-center justify-center gap-1.5 rounded-full border border-border/60 py-2.5 text-[12px]">
+                  {copied ? <Check className="h-3.5 w-3.5 text-primary" /> : <Copy className="h-3.5 w-3.5" />}
+                  {copied ? "Copied" : "Copy"}
+                </button>
+                <button onClick={shareLink} className="flex flex-1 items-center justify-center gap-1.5 rounded-full bg-gradient-ember py-2.5 text-[12px] font-medium text-primary-foreground shadow-ember">
+                  <Mail className="h-3.5 w-3.5" /> Share
+                </button>
+              </div>
+            </div>
+
+            <div className="mt-5">
+              <div className="text-[10px] uppercase tracking-[0.3em] text-muted-foreground">Invite by name</div>
+              <div className="mt-2 space-y-2">
+                <input value={inviteName} onChange={(e) => setInviteName(e.target.value)} placeholder="Their name" className="w-full rounded-2xl border border-border/60 bg-background/60 px-4 py-3 text-[14px] outline-none focus:border-primary/60" />
+                <input value={inviteEmail} onChange={(e) => setInviteEmail(e.target.value)} type="email" placeholder="Email (optional)" className="w-full rounded-2xl border border-border/60 bg-background/60 px-4 py-3 text-[14px] outline-none focus:border-primary/60" />
+                <button onClick={addInvite} className="flex w-full items-center justify-center gap-1.5 rounded-full bg-gradient-ember py-3 text-[13px] font-medium text-primary-foreground shadow-ember">
+                  <UserPlus className="h-3.5 w-3.5" /> Add to circle
+                </button>
+              </div>
+            </div>
+
+            <div className="mt-6">
+              <div className="flex items-baseline justify-between">
+                <div className="text-[10px] uppercase tracking-[0.3em] text-muted-foreground">In the room</div>
+                <div className="text-[10px] text-muted-foreground">{(s.participants?.length ?? 0) + 1} people</div>
+              </div>
+              <div className="mt-2 space-y-2">
+                <div className="flex items-center justify-between rounded-2xl border border-border/60 bg-card/40 px-4 py-3">
+                  <div className="flex items-center gap-3">
+                    <span className="grid h-8 w-8 place-items-center rounded-full bg-gradient-ember text-[11px] font-medium text-primary-foreground">You</span>
+                    <div>
+                      <div className="text-[13px]">You</div>
+                      <div className="text-[10px] uppercase tracking-[0.2em] text-primary/80">Host</div>
+                    </div>
+                  </div>
+                  <span className="text-[10px] uppercase tracking-[0.2em] text-primary/80">In room</span>
+                </div>
+                {(s.participants ?? []).map((p) => (
+                  <div key={p.id} className="flex items-center justify-between rounded-2xl border border-border/60 bg-card/40 px-4 py-3">
+                    <div className="flex items-center gap-3">
+                      <span className={`grid h-8 w-8 place-items-center rounded-full text-[11px] font-medium ${p.status === "joined" ? "bg-gradient-ember text-primary-foreground" : "bg-foreground/15 text-foreground/80"}`}>{p.name.slice(0,1).toUpperCase()}</span>
+                      <div>
+                        <div className="text-[13px]">{p.name}</div>
+                        <div className="text-[10px] text-muted-foreground">{p.email ?? (p.status === "joined" ? "Joined" : "Invite pending")}</div>
+                      </div>
+                    </div>
+                    <button onClick={() => removeInvite(p.id)} className="grid h-7 w-7 place-items-center rounded-full border border-border/60 text-muted-foreground hover:text-foreground"><X className="h-3 w-3" /></button>
+                  </div>
+                ))}
+                {(s.participants?.length ?? 0) === 0 && (
+                  <div className="rounded-2xl border border-dashed border-border/60 px-4 py-5 text-center text-[12px] text-muted-foreground">No one invited yet.</div>
+                )}
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+
+
       {s.status === "completed" && !showReport && (
         <div className="fixed inset-x-0 bottom-0 mx-auto w-full max-w-[440px] px-5 pb-5">
           <button onClick={() => setShowReport(true)} className="w-full rounded-full bg-gradient-ember py-3 text-[13px] font-medium text-primary-foreground shadow-ember">View report</button>
