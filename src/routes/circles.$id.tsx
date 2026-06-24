@@ -173,8 +173,8 @@ function CircleRoom() {
   const shareLink = async () => {
     const data = { title: `Join "${s.title}" on Ember`, text: `You're invited to a mediated circle. Goal: ${s.goal}`, url: inviteLink };
     try {
-      // @ts-expect-error – navigator.share is not in all TS libs
-      if (navigator.share) { await navigator.share(data); return; }
+      const nav: any = navigator;
+      if (nav.share) { await nav.share(data); return; }
     } catch { /* user cancelled */ }
     copyLink();
   };
