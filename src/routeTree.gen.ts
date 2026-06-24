@@ -20,6 +20,7 @@ import { Route as AppRouteImport } from './routes/app'
 import { Route as AnalystRouteImport } from './routes/analyst'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as CirclesIndexRouteImport } from './routes/circles.index'
+import { Route as JoinIdRouteImport } from './routes/join.$id'
 import { Route as CirclesIdRouteImport } from './routes/circles.$id'
 
 const TextRoute = TextRouteImport.update({
@@ -77,6 +78,11 @@ const CirclesIndexRoute = CirclesIndexRouteImport.update({
   path: '/circles/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const JoinIdRoute = JoinIdRouteImport.update({
+  id: '/join/$id',
+  path: '/join/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const CirclesIdRoute = CirclesIdRouteImport.update({
   id: '/circles/$id',
   path: '/circles/$id',
@@ -95,6 +101,7 @@ export interface FileRoutesByFullPath {
   '/simulator-setup': typeof SimulatorSetupRoute
   '/text': typeof TextRoute
   '/circles/$id': typeof CirclesIdRoute
+  '/join/$id': typeof JoinIdRoute
   '/circles/': typeof CirclesIndexRoute
 }
 export interface FileRoutesByTo {
@@ -109,6 +116,7 @@ export interface FileRoutesByTo {
   '/simulator-setup': typeof SimulatorSetupRoute
   '/text': typeof TextRoute
   '/circles/$id': typeof CirclesIdRoute
+  '/join/$id': typeof JoinIdRoute
   '/circles': typeof CirclesIndexRoute
 }
 export interface FileRoutesById {
@@ -124,6 +132,7 @@ export interface FileRoutesById {
   '/simulator-setup': typeof SimulatorSetupRoute
   '/text': typeof TextRoute
   '/circles/$id': typeof CirclesIdRoute
+  '/join/$id': typeof JoinIdRoute
   '/circles/': typeof CirclesIndexRoute
 }
 export interface FileRouteTypes {
@@ -140,6 +149,7 @@ export interface FileRouteTypes {
     | '/simulator-setup'
     | '/text'
     | '/circles/$id'
+    | '/join/$id'
     | '/circles/'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -154,6 +164,7 @@ export interface FileRouteTypes {
     | '/simulator-setup'
     | '/text'
     | '/circles/$id'
+    | '/join/$id'
     | '/circles'
   id:
     | '__root__'
@@ -168,6 +179,7 @@ export interface FileRouteTypes {
     | '/simulator-setup'
     | '/text'
     | '/circles/$id'
+    | '/join/$id'
     | '/circles/'
   fileRoutesById: FileRoutesById
 }
@@ -183,6 +195,7 @@ export interface RootRouteChildren {
   SimulatorSetupRoute: typeof SimulatorSetupRoute
   TextRoute: typeof TextRoute
   CirclesIdRoute: typeof CirclesIdRoute
+  JoinIdRoute: typeof JoinIdRoute
   CirclesIndexRoute: typeof CirclesIndexRoute
 }
 
@@ -265,6 +278,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CirclesIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/join/$id': {
+      id: '/join/$id'
+      path: '/join/$id'
+      fullPath: '/join/$id'
+      preLoaderRoute: typeof JoinIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/circles/$id': {
       id: '/circles/$id'
       path: '/circles/$id'
@@ -287,6 +307,7 @@ const rootRouteChildren: RootRouteChildren = {
   SimulatorSetupRoute: SimulatorSetupRoute,
   TextRoute: TextRoute,
   CirclesIdRoute: CirclesIdRoute,
+  JoinIdRoute: JoinIdRoute,
   CirclesIndexRoute: CirclesIndexRoute,
 }
 export const routeTree = rootRouteImport
