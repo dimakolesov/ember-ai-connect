@@ -4,8 +4,7 @@
 
 @custom-variant dark (&:is(.dark *));
 
-/* Premium typography */
-@import url("https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600;700&display=swap");
+/* Premium typography loaded via <link> in __root.tsx */
 
 @theme inline {
   --radius-sm: calc(var(--radius) - 4px);
