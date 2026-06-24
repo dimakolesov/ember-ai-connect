@@ -1,5 +1,5 @@
 import { createFileRoute, Link, useLocation } from "@tanstack/react-router";
-import { Home, Sparkles, MessageCircleHeart, Compass, Crown, ArrowUpRight } from "lucide-react";
+import { Home, Sparkles, MessageCircleHeart, Compass, Crown, ArrowUpRight, Users } from "lucide-react";
 import { EmberBg } from "@/components/EmberBg";
 import { PhoneFrame } from "@/components/PhoneFrame";
 import { StatusBar } from "@/components/StatusBar";
