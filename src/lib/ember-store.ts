@@ -3,10 +3,20 @@
 
 export type Channel = "group" | "private";
 
+export type Participant = {
+  id: string;
+  name: string;
+  email?: string;
+  role: "host" | "guest";
+  status: "invited" | "joined";
+  invitedAt: number;
+};
+
 export type CircleMessage = {
   id: string;
   channel: Channel;
-  from: "you" | "them" | "ai";
+  from: "you" | "them" | "ai" | string; // participant id allowed
+  fromName?: string;
   text: string;
   at: number;
 };
@@ -20,6 +30,8 @@ export type CircleSession = {
   status: CircleStatus;
   createdAt: number;
   intake: { goals: string; expectations: string; consent: boolean };
+  participants?: Participant[];
+  inviteCode?: string;
   messages: CircleMessage[];
   report?: {
     summary: string;
