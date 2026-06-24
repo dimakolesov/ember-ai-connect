@@ -1,10 +1,10 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
-import { useEffect, useRef, useState } from "react";
-import { Send, Shield, Lock, Users, FileText, Sparkles, X } from "lucide-react";
+import { useEffect, useMemo, useRef, useState } from "react";
+import { Send, Shield, Lock, Users, FileText, Sparkles, X, UserPlus, Copy, Check, Mail, Link as LinkIcon } from "lucide-react";
 import { EmberBg } from "@/components/EmberBg";
 import { PhoneFrame } from "@/components/PhoneFrame";
 import { StatusBar } from "@/components/StatusBar";
-import { getCircle, upsertCircle, uid, type CircleSession, type Channel, type CircleMessage } from "@/lib/ember-store";
+import { getCircle, upsertCircle, uid, type CircleSession, type Channel, type CircleMessage, type Participant } from "@/lib/ember-store";
 import { toast } from "sonner";
 
 export const Route = createFileRoute("/circles/$id")({
@@ -27,6 +27,10 @@ function CircleRoom() {
   const [intakeStep, setIntakeStep] = useState(0);
   const [intakeAnswer, setIntakeAnswer] = useState("");
   const [showReport, setShowReport] = useState(false);
+  const [showInvite, setShowInvite] = useState(false);
+  const [inviteName, setInviteName] = useState("");
+  const [inviteEmail, setInviteEmail] = useState("");
+  const [copied, setCopied] = useState(false);
   const scroll = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
