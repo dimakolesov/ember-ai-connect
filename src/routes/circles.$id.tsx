@@ -122,6 +122,65 @@ function CircleRoom() {
     toast.success("Report ready");
   };
 
+  const inviteCode = useMemo(() => {
+    if (s.inviteCode) return s.inviteCode;
+    const code = uid();
+    persist({ ...s, inviteCode: code });
+    return code;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [s.id]);
+
+  const inviteLink = typeof window !== "undefined"
+    ? `${window.location.origin}/join/${s.id}?c=${inviteCode}`
+    : `/join/${s.id}?c=${inviteCode}`;
+
+  const addInvite = () => {
+    const name = inviteName.trim();
+    if (!name) { toast("Add a name"); return; }
+    const p: Participant = {
+      id: uid(),
+      name,
+      email: inviteEmail.trim() || undefined,
+      role: "guest",
+      status: "invited",
+      invitedAt: Date.now(),
+    };
+    const next: CircleSession = { ...s, participants: [...(s.participants ?? []), p] };
+    persist(next);
+    setInviteName("");
+    setInviteEmail("");
+    toast.success(`${name} invited`, { description: "Share the link so they can join." });
+    // Facilitator note in group channel
+    aiReply("group", `${name} has been invited. I'll bring them in gently when they join.`, 700);
+  };
+
+  const removeInvite = (pid: string) => {
+    const next: CircleSession = { ...s, participants: (s.participants ?? []).filter((x) => x.id !== pid) };
+    persist(next);
+  };
+
+  const copyLink = async () => {
+    try {
+      await navigator.clipboard.writeText(inviteLink);
+      setCopied(true);
+      toast.success("Invite link copied");
+      setTimeout(() => setCopied(false), 1800);
+    } catch {
+      toast("Copy failed", { description: inviteLink });
+    }
+  };
+
+  const shareLink = async () => {
+    const data = { title: `Join "${s.title}" on Ember`, text: `You're invited to a mediated circle. Goal: ${s.goal}`, url: inviteLink };
+    try {
+      // @ts-expect-error – navigator.share is not in all TS libs
+      if (navigator.share) { await navigator.share(data); return; }
+    } catch { /* user cancelled */ }
+    copyLink();
+  };
+
+
+
   // Intake mode
   if (s.status === "intake") {
     const step = INTAKE_STEPS[intakeStep];
