@@ -1,5 +1,5 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Send, Shield, Lock, Users, FileText, Sparkles, X, UserPlus, Copy, Check, Mail, Link as LinkIcon } from "lucide-react";
 import { EmberBg } from "@/components/EmberBg";
 import { PhoneFrame } from "@/components/PhoneFrame";
