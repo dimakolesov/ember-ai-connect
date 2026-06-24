@@ -8,7 +8,7 @@ import { BottomNav } from "./app";
 import { loadCircles, upsertCircle, uid, type CircleSession } from "@/lib/ember-store";
 import { toast } from "sonner";
 
-export const Route = createFileRoute("/circles")({
+export const Route = createFileRoute("/circles/")({
   head: () => ({ meta: [{ title: "Circles — Ember" }, { name: "description", content: "Mediated group conversations with an AI facilitator." }] }),
   component: CirclesPage,
 });
