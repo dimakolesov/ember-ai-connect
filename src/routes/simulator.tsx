@@ -70,10 +70,17 @@ function Sim() {
             <div className="text-[10px] uppercase tracking-[0.25em] text-primary/80 capitalize">{persona}</div>
           </div>
         </div>
-        <div className="w-10" />
+        <div className="flex items-center gap-1">
+          <Link to="/simulator-setup" aria-label="Setup" className="grid h-10 w-10 place-items-center rounded-full glass"><Sliders className="h-4 w-4" /></Link>
+          <button onClick={() => setRewindOpen(true)} aria-label="Rewind" className="grid h-10 w-10 place-items-center rounded-full glass"><Rewind className="h-4 w-4" /></button>
+        </div>
       </header>
 
-      {/* Persona switcher */}
+      {branchedAt !== null && (
+        <div className="mx-6 mt-3 flex items-center gap-2 rounded-full border border-primary/40 bg-primary/10 px-3 py-1.5 text-[10px] uppercase tracking-[0.2em] text-primary">
+          <GitBranch className="h-3 w-3" /> New branch from message #{branchedAt + 1}
+        </div>
+      )}
       <div className="mt-3 flex justify-center gap-1.5 px-6">
         {(["avoidant", "anxious", "cold"] as const).map((p) => (
           <button
