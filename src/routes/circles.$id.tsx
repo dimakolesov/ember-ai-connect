@@ -39,6 +39,13 @@ function CircleRoom() {
     setS(found);
   }, [id, nav]);
 
+  useEffect(() => {
+    if (!s || s.inviteCode) return;
+    const next = { ...s, inviteCode: uid() };
+    setS(next);
+    upsertCircle(next);
+  }, [s?.id, s?.inviteCode]);
+
   useEffect(() => { scroll.current?.scrollTo({ top: 99999, behavior: "smooth" }); }, [s?.messages.length, tab, typing, intakeStep]);
 
   if (!s) return null;
@@ -122,13 +129,7 @@ function CircleRoom() {
     toast.success("Report ready");
   };
 
-  const inviteCode = useMemo(() => {
-    if (s.inviteCode) return s.inviteCode;
-    const code = uid();
-    persist({ ...s, inviteCode: code });
-    return code;
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [s.id]);
+  const inviteCode = s.inviteCode ?? "";
 
   const inviteLink = typeof window !== "undefined"
     ? `${window.location.origin}/join/${s.id}?c=${inviteCode}`
