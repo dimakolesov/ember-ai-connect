@@ -34,6 +34,8 @@ function Sim() {
   const [msgs, setMsgs] = useState<Msg[]>(opening);
   const [input, setInput] = useState("");
   const [typing, setTyping] = useState(false);
+  const [rewindOpen, setRewindOpen] = useState(false);
+  const [branchedAt, setBranchedAt] = useState<number | null>(null);
   const scroll = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
