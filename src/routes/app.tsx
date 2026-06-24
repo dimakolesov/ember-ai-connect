@@ -15,9 +15,10 @@ export const Route = createFileRoute("/app")({
 });
 
 const features = [
+  { to: "/circles" as const, eyebrow: "Circles", title: "Hard talks, mediated", sub: "AI facilitator + whisper channel." },
   { to: "/analyst" as const, eyebrow: "Analyst", title: "Decode your last conversation", sub: "Read between the lines." },
   { to: "/text" as const, eyebrow: "Compose", title: "Break the silence — perfectly", sub: "Calibrated opening lines." },
-  { to: "/simulator" as const, eyebrow: "Rehearse", title: "Talk to a model of them", sub: "Before the real conversation." },
+  { to: "/simulator-setup" as const, eyebrow: "Rehearse", title: "Talk to a model of them", sub: "Tune the partner. Run the rep." },
   { to: "/recovery" as const, eyebrow: "Recovery", title: "Become someone they regret losing", sub: "30-day transformation arc." },
   { to: "/insights" as const, eyebrow: "Insight", title: "Why attraction really fades", sub: "Attachment theory, in plain language." },
 ];
