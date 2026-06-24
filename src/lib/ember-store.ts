@@ -30,6 +30,8 @@ export type CircleSession = {
   status: CircleStatus;
   createdAt: number;
   intake: { goals: string; expectations: string; consent: boolean };
+  participants?: Participant[];
+  inviteCode?: string;
   messages: CircleMessage[];
   report?: {
     summary: string;
