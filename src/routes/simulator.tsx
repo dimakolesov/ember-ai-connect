@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
+import { Rewind, Sliders, GitBranch, X } from "lucide-react";
 import { EmberBg } from "@/components/EmberBg";
 import { PhoneFrame } from "@/components/PhoneFrame";
 import { StatusBar } from "@/components/StatusBar";
@@ -33,6 +34,8 @@ function Sim() {
   const [msgs, setMsgs] = useState<Msg[]>(opening);
   const [input, setInput] = useState("");
   const [typing, setTyping] = useState(false);
+  const [rewindOpen, setRewindOpen] = useState(false);
+  const [branchedAt, setBranchedAt] = useState<number | null>(null);
   const scroll = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -67,10 +70,17 @@ function Sim() {
             <div className="text-[10px] uppercase tracking-[0.25em] text-primary/80 capitalize">{persona}</div>
           </div>
         </div>
-        <div className="w-10" />
+        <div className="flex items-center gap-1">
+          <Link to="/simulator-setup" aria-label="Setup" className="grid h-10 w-10 place-items-center rounded-full glass"><Sliders className="h-4 w-4" /></Link>
+          <button onClick={() => setRewindOpen(true)} aria-label="Rewind" className="grid h-10 w-10 place-items-center rounded-full glass"><Rewind className="h-4 w-4" /></button>
+        </div>
       </header>
 
-      {/* Persona switcher */}
+      {branchedAt !== null && (
+        <div className="mx-6 mt-3 flex items-center gap-2 rounded-full border border-primary/40 bg-primary/10 px-3 py-1.5 text-[10px] uppercase tracking-[0.2em] text-primary">
+          <GitBranch className="h-3 w-3" /> New branch from message #{branchedAt + 1}
+        </div>
+      )}
       <div className="mt-3 flex justify-center gap-1.5 px-6">
         {(["avoidant", "anxious", "cold"] as const).map((p) => (
           <button
@@ -141,6 +151,42 @@ function Sim() {
       </div>
 
       <BottomNav pathname="/simulator" />
+
+      {rewindOpen && (
+        <div className="fixed inset-0 z-40 flex items-end justify-center bg-black/70 backdrop-blur-sm animate-fade-up" onClick={() => setRewindOpen(false)}>
+          <div className="max-h-[80vh] w-full max-w-[440px] overflow-y-auto rounded-t-[32px] border border-border/60 bg-card/95 p-6 backdrop-blur-2xl" onClick={(e) => e.stopPropagation()}>
+            <div className="mx-auto mb-4 h-1 w-10 rounded-full bg-foreground/20" />
+            <div className="flex items-center justify-between">
+              <div>
+                <div className="text-[10px] uppercase tracking-[0.3em] text-primary/90">Rewind</div>
+                <h3 className="mt-1 font-serif text-[22px]">Try a different answer</h3>
+                <p className="text-[12px] text-muted-foreground">Tap a moment. The thread rewinds there.</p>
+              </div>
+              <button onClick={() => setRewindOpen(false)} className="grid h-9 w-9 place-items-center rounded-full glass"><X className="h-4 w-4" /></button>
+            </div>
+            <div className="mt-5 space-y-2">
+              {msgs.map((m, i) => (
+                <button
+                  key={i}
+                  onClick={() => {
+                    setMsgs(msgs.slice(0, i + 1));
+                    setBranchedAt(i);
+                    setRewindOpen(false);
+                  }}
+                  className="flex w-full items-start gap-3 rounded-2xl border border-border/60 bg-background/30 px-3 py-2.5 text-left transition-colors hover:border-primary/50"
+                >
+                  <span className="mt-1 text-[10px] uppercase tracking-[0.2em] text-muted-foreground">#{i + 1}</span>
+                  <span className="min-w-0 flex-1">
+                    <span className="block text-[10px] uppercase tracking-[0.25em] text-primary/80">{m.from === "you" ? "You" : "Them"}</span>
+                    <span className="block truncate text-[13px] text-foreground/90">{m.text}</span>
+                  </span>
+                  <GitBranch className="h-4 w-4 text-primary" />
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
     </PhoneFrame>
   );
 }

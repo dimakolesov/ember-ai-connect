@@ -1,5 +1,5 @@
 import { createFileRoute, Link, useLocation } from "@tanstack/react-router";
-import { Home, Sparkles, MessageCircleHeart, Compass, Crown, ArrowUpRight } from "lucide-react";
+import { Home, Sparkles, MessageCircleHeart, Compass, Crown, ArrowUpRight, Users } from "lucide-react";
 import { EmberBg } from "@/components/EmberBg";
 import { PhoneFrame } from "@/components/PhoneFrame";
 import { StatusBar } from "@/components/StatusBar";
@@ -15,9 +15,10 @@ export const Route = createFileRoute("/app")({
 });
 
 const features = [
+  { to: "/circles" as const, eyebrow: "Circles", title: "Hard talks, mediated", sub: "AI facilitator + whisper channel." },
   { to: "/analyst" as const, eyebrow: "Analyst", title: "Decode your last conversation", sub: "Read between the lines." },
   { to: "/text" as const, eyebrow: "Compose", title: "Break the silence — perfectly", sub: "Calibrated opening lines." },
-  { to: "/simulator" as const, eyebrow: "Rehearse", title: "Talk to a model of them", sub: "Before the real conversation." },
+  { to: "/simulator-setup" as const, eyebrow: "Rehearse", title: "Talk to a model of them", sub: "Tune the partner. Run the rep." },
   { to: "/recovery" as const, eyebrow: "Recovery", title: "Become someone they regret losing", sub: "30-day transformation arc." },
   { to: "/insights" as const, eyebrow: "Insight", title: "Why attraction really fades", sub: "Attachment theory, in plain language." },
 ];
@@ -90,7 +91,7 @@ function HomePage() {
       <section className="mt-8 px-7 pb-36">
         <div className="mb-4 flex items-baseline justify-between">
           <h3 className="font-serif text-[20px] text-foreground/90">Tools for the in-between</h3>
-          <span className="text-[10px] uppercase tracking-[0.3em] text-muted-foreground">5</span>
+          <span className="text-[10px] uppercase tracking-[0.3em] text-muted-foreground">6</span>
         </div>
         <div className="divide-y divide-border/50 overflow-hidden rounded-[28px] border border-border/60 bg-card/30 backdrop-blur-xl">
           {features.map((f, idx) => (
@@ -119,8 +120,9 @@ function HomePage() {
 export function BottomNav({ pathname }: { pathname: string }) {
   const items = [
     { to: "/app" as const, label: "Home", Icon: Home },
+    { to: "/circles" as const, label: "Circles", Icon: Users },
+    { to: "/simulator-setup" as const, label: "Talk", Icon: MessageCircleHeart },
     { to: "/analyst" as const, label: "Analyze", Icon: Sparkles },
-    { to: "/simulator" as const, label: "Talk", Icon: MessageCircleHeart },
     { to: "/recovery" as const, label: "Heal", Icon: Compass },
   ];
   return (
