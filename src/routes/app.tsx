@@ -91,7 +91,7 @@ function HomePage() {
       <section className="mt-8 px-7 pb-36">
         <div className="mb-4 flex items-baseline justify-between">
           <h3 className="font-serif text-[20px] text-foreground/90">Tools for the in-between</h3>
-          <span className="text-[10px] uppercase tracking-[0.3em] text-muted-foreground">5</span>
+          <span className="text-[10px] uppercase tracking-[0.3em] text-muted-foreground">6</span>
         </div>
         <div className="divide-y divide-border/50 overflow-hidden rounded-[28px] border border-border/60 bg-card/30 backdrop-blur-xl">
           {features.map((f, idx) => (
