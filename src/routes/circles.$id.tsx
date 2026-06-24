@@ -186,10 +186,30 @@ function CircleRoom() {
             <div className="flex items-center gap-1 text-[9px] uppercase tracking-[0.25em] text-primary/80"><Shield className="h-3 w-3" /> Facilitator</div>
           </div>
         </div>
-        <button onClick={finish} disabled={s.status === "completed"} className="grid h-10 w-10 place-items-center rounded-full glass disabled:opacity-40" aria-label="Finish & report">
-          <FileText className="h-4 w-4" />
-        </button>
+        <div className="flex items-center gap-1.5">
+          <button onClick={() => setShowInvite(true)} className="relative grid h-10 w-10 place-items-center rounded-full glass" aria-label="Invite">
+            <UserPlus className="h-4 w-4" />
+            {(s.participants?.length ?? 0) > 0 && (
+              <span className="absolute -right-0.5 -top-0.5 grid h-4 min-w-4 place-items-center rounded-full bg-gradient-ember px-1 text-[9px] font-medium text-primary-foreground">{s.participants!.length}</span>
+            )}
+          </button>
+          <button onClick={finish} disabled={s.status === "completed"} className="grid h-10 w-10 place-items-center rounded-full glass disabled:opacity-40" aria-label="Finish & report">
+            <FileText className="h-4 w-4" />
+          </button>
+        </div>
       </header>
+
+      {(s.participants?.length ?? 0) > 0 && (
+        <div className="mt-3 flex gap-1.5 overflow-x-auto px-6 pb-1">
+          {s.participants!.map((p) => (
+            <div key={p.id} className="flex shrink-0 items-center gap-1.5 rounded-full border border-border/60 bg-card/50 px-2.5 py-1 text-[10px] backdrop-blur-xl">
+              <span className={`grid h-5 w-5 place-items-center rounded-full text-[9px] font-medium ${p.status === "joined" ? "bg-gradient-ember text-primary-foreground" : "bg-foreground/15 text-foreground/70"}`}>{p.name.slice(0, 1).toUpperCase()}</span>
+              <span className="text-foreground/85">{p.name}</span>
+              <span className={`uppercase tracking-[0.15em] ${p.status === "joined" ? "text-primary/80" : "text-muted-foreground"}`}>{p.status === "joined" ? "in" : "pend"}</span>
+            </div>
+          ))}
+        </div>
+      )}
 
       <div className="mt-4 px-6">
         <div className="flex rounded-full border border-border/60 bg-background/50 p-1 backdrop-blur-xl">
