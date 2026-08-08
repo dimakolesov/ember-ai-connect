@@ -14,7 +14,6 @@ import { Route as SimulatorSetupRouteImport } from './routes/simulator-setup'
 import { Route as SimulatorRouteImport } from './routes/simulator'
 import { Route as RecoveryRouteImport } from './routes/recovery'
 import { Route as PremiumRouteImport } from './routes/premium'
-import { Route as OnboardingRouteImport } from './routes/onboarding'
 import { Route as InsightsRouteImport } from './routes/insights'
 import { Route as AppRouteImport } from './routes/app'
 import { Route as AnalystRouteImport } from './routes/analyst'
@@ -46,11 +45,6 @@ const RecoveryRoute = RecoveryRouteImport.update({
 const PremiumRoute = PremiumRouteImport.update({
   id: '/premium',
   path: '/premium',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const OnboardingRoute = OnboardingRouteImport.update({
-  id: '/onboarding',
-  path: '/onboarding',
   getParentRoute: () => rootRouteImport,
 } as any)
 const InsightsRoute = InsightsRouteImport.update({
@@ -94,7 +88,6 @@ export interface FileRoutesByFullPath {
   '/analyst': typeof AnalystRoute
   '/app': typeof AppRoute
   '/insights': typeof InsightsRoute
-  '/onboarding': typeof OnboardingRoute
   '/premium': typeof PremiumRoute
   '/recovery': typeof RecoveryRoute
   '/simulator': typeof SimulatorRoute
@@ -109,7 +102,6 @@ export interface FileRoutesByTo {
   '/analyst': typeof AnalystRoute
   '/app': typeof AppRoute
   '/insights': typeof InsightsRoute
-  '/onboarding': typeof OnboardingRoute
   '/premium': typeof PremiumRoute
   '/recovery': typeof RecoveryRoute
   '/simulator': typeof SimulatorRoute
@@ -125,7 +117,6 @@ export interface FileRoutesById {
   '/analyst': typeof AnalystRoute
   '/app': typeof AppRoute
   '/insights': typeof InsightsRoute
-  '/onboarding': typeof OnboardingRoute
   '/premium': typeof PremiumRoute
   '/recovery': typeof RecoveryRoute
   '/simulator': typeof SimulatorRoute
@@ -142,7 +133,6 @@ export interface FileRouteTypes {
     | '/analyst'
     | '/app'
     | '/insights'
-    | '/onboarding'
     | '/premium'
     | '/recovery'
     | '/simulator'
@@ -157,7 +147,6 @@ export interface FileRouteTypes {
     | '/analyst'
     | '/app'
     | '/insights'
-    | '/onboarding'
     | '/premium'
     | '/recovery'
     | '/simulator'
@@ -172,7 +161,6 @@ export interface FileRouteTypes {
     | '/analyst'
     | '/app'
     | '/insights'
-    | '/onboarding'
     | '/premium'
     | '/recovery'
     | '/simulator'
@@ -188,7 +176,6 @@ export interface RootRouteChildren {
   AnalystRoute: typeof AnalystRoute
   AppRoute: typeof AppRoute
   InsightsRoute: typeof InsightsRoute
-  OnboardingRoute: typeof OnboardingRoute
   PremiumRoute: typeof PremiumRoute
   RecoveryRoute: typeof RecoveryRoute
   SimulatorRoute: typeof SimulatorRoute
@@ -234,13 +221,6 @@ declare module '@tanstack/react-router' {
       path: '/premium'
       fullPath: '/premium'
       preLoaderRoute: typeof PremiumRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/onboarding': {
-      id: '/onboarding'
-      path: '/onboarding'
-      fullPath: '/onboarding'
-      preLoaderRoute: typeof OnboardingRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/insights': {
@@ -300,7 +280,6 @@ const rootRouteChildren: RootRouteChildren = {
   AnalystRoute: AnalystRoute,
   AppRoute: AppRoute,
   InsightsRoute: InsightsRoute,
-  OnboardingRoute: OnboardingRoute,
   PremiumRoute: PremiumRoute,
   RecoveryRoute: RecoveryRoute,
   SimulatorRoute: SimulatorRoute,
@@ -313,13 +292,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
