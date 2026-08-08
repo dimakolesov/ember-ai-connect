@@ -324,7 +324,7 @@ function HomePage() {
         </div>
       )}
 
-      <BottomNav pathname={pathname} />
+      {unlocked && <BottomNav pathname={pathname} />}
     </PhoneFrame>
   );
 }
