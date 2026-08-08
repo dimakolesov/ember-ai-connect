@@ -54,19 +54,14 @@ function Landing() {
       <div className="mt-[14svh] px-7 pb-10">
         <div className="space-y-3 animate-fade-up delay-300">
           <Link
-            to="/onboarding"
+            to="/app"
             className="group relative flex h-[54px] items-center justify-center overflow-hidden rounded-full bg-foreground text-[14px] font-medium tracking-[0.02em] text-background transition-transform active:scale-[0.98]"
           >
             <span>Begin</span>
             <span className="ml-2 transition-transform group-hover:translate-x-0.5">→</span>
           </Link>
-          <Link
-            to="/app"
-            className="flex h-12 items-center justify-center text-[12px] font-medium uppercase tracking-[0.32em] text-muted-foreground hover:text-foreground transition-colors"
-          >
-            I have an account
-          </Link>
         </div>
+
 
         <p className="mt-10 text-center text-[10px] uppercase tracking-[0.4em] text-muted-foreground/60 animate-fade-up delay-500">
           Private · Encrypted · Without judgment
