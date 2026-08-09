@@ -336,7 +336,6 @@ export function BottomNav({ pathname }: { pathname: string }) {
     { to: "/app" as const, label: "Home", Icon: Home },
     { to: "/circles" as const, label: "Circles", Icon: Users },
     { to: "/simulator-setup" as const, label: "Talk", Icon: MessageCircleHeart },
-    { to: "/analyst" as const, label: "Analyze", Icon: Sparkles },
     { to: "/recovery" as const, label: "Heal", Icon: Compass },
   ];
   return (
