@@ -164,7 +164,7 @@ function HomePage() {
           disabled={analyzing}
           className="flex h-[54px] w-full items-center justify-center rounded-full bg-gradient-ember text-[14px] font-medium text-primary-foreground shadow-ember transition-transform active:scale-[0.98] disabled:opacity-70"
         >
-          {analyzing ? "Reading between the lines…" : "Analyze chat & partner"}
+          {analyzing ? "Reading between the lines…" : "Analyze"}
         </button>
       </section>
 
