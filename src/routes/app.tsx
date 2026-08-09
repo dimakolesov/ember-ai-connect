@@ -245,16 +245,14 @@ function HomePage() {
         </section>
       )}
 
-      {/* Tools */}
-      {metrics && (
+      {/* Tools — unlocked only */}
+      {unlocked && metrics && (
       <section className="mt-8 px-7 pb-36">
         <div className="mb-4 flex items-baseline justify-between">
           <h3 className="font-serif text-[20px] text-foreground/90">Tools for the in-between</h3>
-          {!unlocked && <span className="text-[10px] uppercase tracking-[0.3em] text-muted-foreground">Locked</span>}
         </div>
-        <div className={`divide-y divide-border/50 overflow-hidden rounded-[28px] border border-border/60 bg-card/30 backdrop-blur-xl ${unlocked ? "" : "opacity-60"}`}>
-          {features.map((f) =>
-            unlocked ? (
+        <div className="divide-y divide-border/50 overflow-hidden rounded-[28px] border border-border/60 bg-card/30 backdrop-blur-xl">
+          {features.map((f) => (
               <Link key={f.to} to={f.to} className="group flex items-center justify-between gap-4 px-5 py-4 transition-colors hover:bg-foreground/5">
                 <div className="min-w-0">
                   <div className="text-[10px] uppercase tracking-[0.35em] text-primary/90">{f.eyebrow}</div>
@@ -263,21 +261,7 @@ function HomePage() {
                 </div>
                 <ArrowUpRight className="h-4 w-4 shrink-0 text-foreground/50 group-hover:text-primary" />
               </Link>
-            ) : (
-              <button
-                key={f.to}
-                onClick={() => setPaywall(true)}
-                className="flex w-full items-center justify-between gap-4 px-5 py-4 text-left transition-colors hover:bg-foreground/5"
-              >
-                <div className="min-w-0">
-                  <div className="text-[10px] uppercase tracking-[0.35em] text-primary/90">{f.eyebrow}</div>
-                  <h4 className="mt-1 font-serif text-[19px] leading-tight text-foreground">{f.title}</h4>
-                  <p className="mt-0.5 truncate text-[12px] text-muted-foreground">{f.sub}</p>
-                </div>
-                <Lock className="h-4 w-4 shrink-0 text-foreground/50" />
-              </button>
-            ),
-          )}
+            ))}
         </div>
       </section>
       )}
